@@ -82,7 +82,27 @@ export default async function Video({ params }: PageProps) {
     }
 
     const file = data.result[0];
-        const jsonLd = {
+const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: `${file.title} - ${SITENAME}`,
+        thumbnailUrl: file.splash_img,
+        description: `${file.title} di ${SITENAME} Video Bokep Indo Jepang Jav Barat Simontok Viral Terbaru Bocil Ngentot Jilbab Smp Mama Sma`,
+        url: `https://ukhtismp.pages.dev/v/${file.filecode}`,
+        embedUrl: `https://doodstream.com/e/${file.filecode}`,
+        uploadDate: new Date(
+            file.uploaded + ".000Z"
+        ).toISOString(),
+        interactionStatistic: {
+            '@type': `InteractionCounter`,
+                userInteractionCount: `${file.views}`,
+            interactionType: {
+                '@type': `WatchAction`,
+                target: `https://ukhtismp.pages.dev/v/${file.filecode}`
+            }  
+        }
+        }
+        const jsonLd2 = {
         '@context': 'https://schema.org',
         '@type': 'Article',
         headline: `${file.title} - ${SITENAME}`,
@@ -110,11 +130,15 @@ export default async function Video({ params }: PageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd2) }}
+        />
         {/* ... */}
         </section>
             <iframe
                 className="w-full h-[30vh] md:h-[55vh] lg:h-[70vh]"
-                src={`https://${upstream}/e/${file.filecode}`}
+                src={`https://doodstream.com/e/${file.filecode}`}
                 scrolling="no"
                 title={file.title}
                 frameBorder={0}
